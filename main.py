@@ -14,8 +14,11 @@ def speak(audio):
     engine.runAndWait()
 
 def wishMe():
+    """
+    Greets the user and tell about itself.
+    """
     hour = int(datetime.datetime.now().hour)
-    if hour > 0 and hour < 12:
+    if hour >= 0 and hour < 12:
         speak("Good morning karan!")
     elif hour >= 12 and hour < 18:
         speak("Good afternoon Karan!")
@@ -23,8 +26,10 @@ def wishMe():
         speak("Good evening!")
     speak("I am Rim, please tell me how can i help you Karan!")
 
-def takeCommand(): #it takes input from user in microphone and returns output in string
-
+def takeCommand():
+    """
+    Takes input from user in microphone and returns output in string.
+    """
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening....")
