@@ -1,7 +1,9 @@
 import pyttsx3
 import speech_recognition as sr
 import datetime
-#import pyaudio
+import pyaudio
+import wikipedia
+import webbrowser
 
 
 engine = pyttsx3.init('sapi5')
@@ -30,7 +32,7 @@ def takeCommand():
     """
     Takes input from user in microphone and returns output in string.
     """
-    r = sr.Recognizer()
+    r = sr.Recognizer()         #this class helps us to recognize the audio.
     with sr.Microphone() as source:
         print("Listening....")
         r.pause_threshold = 1
@@ -41,9 +43,8 @@ def takeCommand():
         query = r.recognize_google(audio, language='en-in')
         print(f"user said: {query}\n")
 
-    except Exception as e:
+    except Exception as e:    #if any error occured while recognizing.
         print(e)
-
         print("say that again please...")
         return "None"
     return query
@@ -51,6 +52,17 @@ def takeCommand():
 
 if __name__ == "__main__":
     wishMe()
-    takeCommand()
+    while True:
+        query = takeCommand().lower()
+        #logic for executing task based on query
+        if 'wikipedia' in query:
+            speak('Searching wikipedia...')
+            query = query.replace("Wikipedia", "")
+            results = wikipedia.summary(query, sentences=2)
+            speak("According to wikipedia")
+            print(results)
+            speak(results)
+        
 
-
+        elif 'open youtube' in query:
+            webbrowser.open("youtube.com")
