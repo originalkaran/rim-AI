@@ -138,6 +138,10 @@ if __name__ == "__main__":
             codepath = "C:\\Users\\Karan raj\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codepath)
         
+        elif " repeat after me " in query:
+            query = query.replace("repeat after me","")
+            speak(query)
+        
         elif 'send email to karan' in query:
             try:
                 speak("What should i say?")
