@@ -53,9 +53,12 @@ def takeCommand():
     r = sr.Recognizer()         #this class helps us to recognize the audio.
     with sr.Microphone() as source:
         print("Listening....")
-        r.pause_threshold = 1
+        #r.pause_threshold = 1
+        #print("abc")
+        #r.energy_threshold = 350
+        r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
-
+        
     try:
         print("Recognizing....")
         query = r.recognize_google(audio, language='en-in')
@@ -138,9 +141,12 @@ if __name__ == "__main__":
             codepath = "C:\\Users\\Karan raj\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codepath)
         
-        elif " repeat after me " in query:
+        elif "repeat after me" in query:
             query = query.replace("repeat after me","")
             speak(query)
+        
+        elif 'Hey bhagwan' in query:
+            speak("What happened Karan! Bhagwan tumhare sath hai!")
         
         elif 'send email to karan' in query:
             try:
